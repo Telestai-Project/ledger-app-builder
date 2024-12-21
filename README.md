@@ -15,7 +15,7 @@ They can be pulled via these commands:
 
 ```bash
 # pull the legacy image, built from `legacy/Dockerfile`
-$ docker pull ghcr.io/aipowergrid/ledger-app-builder/ledger-app-builder-legacy:latest
+$ docker pull ghcr.io/telestai-project/ledger-app-builder/ledger-app-builder-legacy:latest
 ```
 
 ## Compile your app in the container
@@ -26,25 +26,25 @@ In the source folder of your application, you can compile with the following com
 
 * For Nano S
 ```bash
-$ sudo docker run --rm -ti -v "$(realpath .):/app" --user root ghcr.io/aipowergrid/ledger-app-builder/ledger-app-builder-legacy:latest
+$ sudo docker run --rm -ti -v "$(realpath .):/app" --user root ghcr.io/telestai-project/ledger-app-builder/ledger-app-builder-legacy:latest
 bash$ BOLOS_SDK=$NANOS_SDK make
 ```
 
 * For Nano S+
 ```bash
-$ sudo docker run --rm -ti -v "$(realpath .):/app" --user root ghcr.io/aipowergrid/ledger-app-builder/ledger-app-builder-legacy:latest
+$ sudo docker run --rm -ti -v "$(realpath .):/app" --user root ghcr.io/telestai-project/ledger-app-builder/ledger-app-builder-legacy:latest
 bash$ BOLOS_SDK=$NANOSP_SDK make
 ```
 
 * For Stax
 ```bash
-$ sudo docker run --rm -ti -v "$(realpath .):/app" --user root ghcr.io/aipowergrid/ledger-app-builder/ledger-app-builder-legacy:latest
+$ sudo docker run --rm -ti -v "$(realpath .):/app" --user root ghcr.io/telestai-project/ledger-app-builder/ledger-app-builder-legacy:latest
 bash$ BOLOS_SDK=$STAX_SDK make
 ```
 
 * For Flex
 ```bash
-$ sudo docker run --rm -ti -v "$(realpath .):/app" --user root ghcr.io/AIPowerGrid/ledger-app-builder/ledger-app-builder-legacy:latest
+$ sudo docker run --rm -ti -v "$(realpath .):/app" --user root ghcr.io/telestai-project/ledger-app-builder/ledger-app-builder-legacy:latest
 bash$ BOLOS_SDK=$FLEX_SDK make
 ```
 
@@ -53,7 +53,7 @@ bash$ BOLOS_SDK=$FLEX_SDK make
 The Docker images include the [Clang Static Analyzer](https://clang-analyzer.llvm.org/), which can be invoked with:
 
 ```bash
-$ sudo docker run --rm -ti -v "$(realpath .):/app" --user root ghcr.io/aipowergrid/ledger-app-builder/ledger-app-builder-legacy:latest
+$ sudo docker run --rm -ti -v "$(realpath .):/app" --user root ghcr.io/telestai-project/ledger-app-builder/ledger-app-builder-legacy:latest
 bash$ BOLOS_SDK=$NANOS_SDK make scan-build
 ```
 
@@ -62,10 +62,11 @@ bash$ BOLOS_SDK=$NANOS_SDK make scan-build
 :warning: Only Nano S, Nano S+, Stax and Flex devices allow application side-loading. This section will not work with a Nano X.
 
 To load the app from the container, you will need additional docker arguments in order to allow Docker to access your USB port.
-Your physical device must be connected, unlocked and the screen showing the dashboard (not inside an application). Same as for compilation, `BOLOS_SDK` variable is used to specify the target device. Use the following docker command to load the app (here for Nano S device) :
+Your physical device must be connected, unlocked and the screen showing the dashboard (not inside an application). Same as for compilation, `BOLOS_SDK` variable is used to specify the target device. 
+Use the following docker command to load the app (here for Nano S device) :
 
 ```bash
-$ sudo docker run --rm -ti  -v "$(realpath .):/app" --privileged -v "/dev/bus/usb:/dev/bus/usb" --user root ghcr.io/aipowergrid/ledger-app-builder/ledger-app-builder-legacy:latest
+$ sudo docker run --rm -ti  -v "$(realpath .):/app" --privileged -v "/dev/bus/usb:/dev/bus/usb" --user root ghcr.io/telestai-project/ledger-app-builder/ledger-app-builder-legacy:latest
 bash$ BOLOS_SDK=$NANOS_SDK make load
 ```
 
@@ -86,7 +87,8 @@ $ (cd full && sudo docker build -t ledger-app-builder-legacy:latest .)
 
 Image can embed the [Coverity Scan](https://scan.coverity.com/) build tool. It is an excellent static analysis tool, and it can be very useful to find bugs in Nano apps.
 
-The build tool must be downloaded before building the image. Archive can be downloaded from <https://scan.coverity.com/download>. Download is available to everyone, but it requires to create an account. After having registered, download Coverity Build Tool 2021.12 for Linux64 and place the downloaded archive in the `coverity` directory.
+The build tool must be downloaded before building the image. Archive can be downloaded from <https://scan.coverity.com/download>. Download is available to everyone, but it requires to create an account. 
+After having registered, download Coverity Build Tool 2021.12 for Linux64 and place the downloaded archive in the `coverity` directory.
 
 Then, build container from the `coverity/` directory with:
 
